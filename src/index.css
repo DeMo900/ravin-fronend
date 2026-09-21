@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@import url('https://googleapis.com');
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-montserrat: "Montserrat", sans-serif;
+  --color-primary: #701B2D;
+  --color-secondary: #1A1A1A;
+  --color-tertiary: #00452D;
+  --color-neutral: #827474;
+}
