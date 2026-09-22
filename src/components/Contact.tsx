@@ -1,11 +1,14 @@
-import {SiInstagram,SiDiscord} from "react-icons/si"
-import {LuArrowBigRight, LuCopy} from "react-icons/lu"
-import {motion} from "framer-motion";
-import type {SectionRefs} from "../types";
-import {Link} from "react-router-dom";
+//import {SiInstagram,SiDiscord} from "react-icons/si"
+//import {LuArrowBigRight, LuCopy} from "react-icons/lu"
+//import {motion} from "framer-motion";
+//import type {SectionRefs} from "../types";
+//import {Link} from "react-router-dom";
 
-const Contact = ({refs}: {refs: SectionRefs}) => {
+const Contact = () => {
     return (
+        <div className="w-full h-vdh bg-secondary"></div>
+    );
+    /*return (
         <motion.section initial={{ opacity: 0}}
   whileInView={{ opacity: 1 }}
   transition={{ duration: 1,delay:1 , type:"spring",stiffness:100 }}
@@ -36,5 +39,6 @@ const Contact = ({refs}: {refs: SectionRefs}) => {
             </div>
         </motion.section>
     );
+    */
 }
 export default Contact;

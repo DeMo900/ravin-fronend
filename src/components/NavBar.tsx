@@ -5,8 +5,8 @@ import { useState } from "react";
 const NavBar = ({refs}: {refs: SectionRefs}) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
       return (
-          <nav className="flex justify-center md:justify-between gap-2 md:gap-0 w-full fixed md:p-4 p-4 z-50 items-center bg-secondary border-b border-neutral">
-             <h1 className="text-primary text-3xl  font-semibold font-montserrat  ">Ravin</h1>
+          <nav className="flex justify-between gap-2 md:gap-0 w-full fixed md:p-4 p-4 z-50 items-center bg-secondary border-b border-neutral">
+             <h1 className="text-primary text-3xl  font-semibold font-montserrat ">Ravin</h1>
              <ul className="md:flex hidden gap-2 md:gap-6">
                <li className=" text-slate-200 text-xs hover:text-primary transition-colors duration-220 cursor-pointer font-montserrat font-semibold" onClick={() => refs.workRef.current?.scrollIntoView({behavior: 'smooth'})}>WORKS</li>
                <li className=" text-slate-200 text-xs hover:text-primary transition-colors duration-220 cursor-pointer font-montserrat font-semibold" onClick={() => refs.workRef.current?.scrollIntoView({behavior: 'smooth'})}>ABOUT</li>
@@ -19,7 +19,7 @@ const NavBar = ({refs}: {refs: SectionRefs}) => {
      onClick={() => setIsMenuOpen(!isMenuOpen)}
      aria-label="Toggle Menu"
     >
-       <LuMenu className="text-white text-4xl" />
+       <LuMenu className="text-white text-4xl " />
     </button>
     <AnimatePresence>
       {isMenuOpen && (
