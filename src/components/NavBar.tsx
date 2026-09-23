@@ -9,7 +9,7 @@ const NavBar = ({refs}: {refs: SectionRefs}) => {
              <h1 className="text-primary text-3xl  font-semibold font-montserrat ">Ravin</h1>
              <ul className="md:flex hidden gap-2 md:gap-6">
                <li className=" text-slate-200 text-xs hover:text-primary transition-colors duration-220 cursor-pointer font-montserrat font-semibold" onClick={() => refs.workRef.current?.scrollIntoView({behavior: 'smooth'})}>WORKS</li>
-               <li className=" text-slate-200 text-xs hover:text-primary transition-colors duration-220 cursor-pointer font-montserrat font-semibold" onClick={() => refs.workRef.current?.scrollIntoView({behavior: 'smooth'})}>ABOUT</li>
+               <li className=" text-slate-200 text-xs hover:text-primary transition-colors duration-220 cursor-pointer font-montserrat font-semibold" onClick={() => refs.introRef.current?.scrollIntoView({behavior: 'smooth'})}>ABOUT</li>
                <li className=" text-slate-200 text-xs hover:text-primary transition-colors duration-220 cursor-pointer font-montserrat font-semibold" onClick={() => refs.introRef.current?.scrollIntoView({behavior: 'smooth'})}>PROCESS</li>
                <li className=" text-slate-200 text-xs hover:text-primary transition-colors duration-220 cursor-pointer font-montserrat font-semibold" onClick={() => refs.contactRef.current?.scrollIntoView({behavior: 'smooth'})}>CONNECT</li>
              </ul>
@@ -43,7 +43,7 @@ const NavBar = ({refs}: {refs: SectionRefs}) => {
             <li
               className="border-b border-neutral p-2 cursor-pointer hover:text-primary transition-colors"
               onClick={() => {
-                refs.workRef.current?.scrollIntoView({ behavior: 'smooth' });
+                refs.introRef.current?.scrollIntoView({ behavior: 'smooth' });
                 setIsMenuOpen(false);
               }}
             >

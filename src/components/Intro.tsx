@@ -12,12 +12,16 @@ const Intro = ({refs}: {refs: SectionRefs}) => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="w-full max-w-120"
+                className="w-full max-w-120 flex-1"
             >
-                <img 
+                <motion.img 
                     src={aboutMeImg} 
                     alt="aboutMe" 
-                    className="w-full h-112.5 md:h-150 object-cover object-center rounded-lg shadow-xl"
+                    className="w-full h-112.5 md:h-150 object-cover object-center rounded-lg shadow-lg md:shadow-2xl shadow-primary"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1}}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
                 />
             </motion.div>
             <motion.div 
@@ -25,11 +29,11 @@ const Intro = ({refs}: {refs: SectionRefs}) => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-                className="font-montserrat max-w-xl text-white "
+                className="font-montserrat max-w-xl text-white flex-1 "
             >
                 <h1 className="text-4xl text-primary mb-6 font-bold tracking-wide">About me</h1>
                <p 
-    className={`whitespace-pre-line text-neutral-300 text-2xl leading-10 cursor-pointer transition-all duration-300 ${
+    className={`whitespace-pre-line text-neutral-300 text-xl md:text-2xl leading-10 cursor-pointer transition-all duration-300 ${
         showFullText ? '' : 'line-clamp-2'
     } md:line-clamp-none`}
     onClick={() => setShowFullText(!showFullText)}
