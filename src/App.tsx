@@ -5,6 +5,7 @@ import Login from './components/Login'
 import { useRef} from 'react'
 import './App.css'
 import { Route, Routes, BrowserRouter } from 'react-router-dom'
+import Collection from './components/Collection'
 
 function App() {
   const introRef = useRef<HTMLDivElement>(null);
@@ -19,6 +20,7 @@ function App() {
               <NavBar refs={{ introRef, workRef, contactRef }} />
               <Hero />
               <Intro refs={{ introRef, workRef, contactRef }} />
+              <Collection refs={{introRef, workRef, contactRef}}/>
             </div>
           } />
           <Route path="/login" element={<Login />} />
