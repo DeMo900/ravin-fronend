@@ -5,7 +5,7 @@ const Collection = ({refs}: {refs: SectionRefs}) => {
     const [works, setWorks] = useState([]);
     const fetchWork = async ()=>{
         try {
-            const res = await fetch(`${baseUrl}`);
+            const res = await fetch(`${baseUrl}/genres`);
             const data = await res.json();
             setWorks(data);
         } catch (error) {
