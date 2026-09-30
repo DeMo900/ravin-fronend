@@ -3,7 +3,7 @@ import Hero from './components/Hero'
 import Intro from './components/Intro'
 import Login from './components/Login'
 import { useRef} from 'react'
-import './App.css'
+import Genre from './pages/Genre'
 import { Route, Routes, BrowserRouter } from 'react-router-dom'
 import Collection from './components/Collection'
 
@@ -23,6 +23,7 @@ function App() {
               <Collection refs={{introRef, workRef, contactRef}}/>
             </div>
           } />
+          <Route path="/genre/:id" element={<Genre />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>

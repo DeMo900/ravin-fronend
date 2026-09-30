@@ -2,13 +2,12 @@ import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import type { SectionRefs } from "../types";
-
+import type { GenreType } from "../types";
 const baseUrl = import.meta.env.VITE_API_URL;
 
-type Genre = { name: string };
 
 const Collection = ({ refs }: { refs: SectionRefs }) => {
-  const [genres, setGenres] = useState<Genre[]>([]);
+  const [genres, setGenres] = useState<GenreType[]>([]);
 
   const fetchGenres = async () => {
     try {
@@ -42,6 +41,7 @@ const Collection = ({ refs }: { refs: SectionRefs }) => {
 
         <ul className="flex flex-col bg-primary/10">
           {genres.map((genre, i) => (
+            <a href={`/genre/${genre.id}`}>
             <motion.li
               key={i}
               initial={{ opacity: 0, y: 20 }}
@@ -51,9 +51,6 @@ const Collection = ({ refs }: { refs: SectionRefs }) => {
               <motion.button
                 type="button"
                 whileHover="hover"
-                onClick={() => {
-                  /* navigate to the genre page here */
-                }}
                 className="w-full flex items-center gap-6 md:gap-10 px-4 md:px-6 py-6 md:py-8 text-left cursor-pointer transition-colors hover:bg-primary/25"
               >
                 <span className="text-xs text-neutral tabular-nums">
@@ -73,6 +70,7 @@ const Collection = ({ refs }: { refs: SectionRefs }) => {
                 </motion.span>
               </motion.button>
             </motion.li>
+            </a>
           ))}
         </ul>
       </div>
