@@ -2,7 +2,15 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import type { ImageType } from "../types";
 
-const ImageCard = ({ image }: { image: ImageType }) => {
+const ImageCard = ({
+  image,
+  onClick,
+  ref,
+}: {
+  image: ImageType;
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
+  ref?: React.Ref<HTMLDivElement>;
+}) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
@@ -12,6 +20,8 @@ const ImageCard = ({ image }: { image: ImageType }) => {
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
+      onClick={onClick}
+      ref={ref}
     >
       <div className="relative w-full rounded-lg overflow-hidden bg-white/5">
         <img

@@ -1,7 +1,7 @@
 import ImageCard from "../components/ImageCard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Loader, X } from "lucide-react";
 import type { GenreType, BackendImage } from "../types";
 
 const Genre = () => {
@@ -12,7 +12,9 @@ const Genre = () => {
   const [genre, setGenre] = useState<GenreType>();
   const [images, setImages] = useState<BackendImage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [preview,setPreview] = useState(false);
+  const previewRef = useRef<HTMLDivElement | null>(null);
+  
   const handleBack = () => {
     if (window.history.state && window.history.state.idx > 0) {
       navigate(-1);
@@ -24,6 +26,7 @@ const Genre = () => {
   const fetchGenreById = async () => {
     if (!genreId) return;
     try {
+      setIsLoading(true);
       const response = await fetch(`${baseUrl}/genre/${genreId}`);
       const json = await response.json();
       if (json.success && json.data) {
@@ -31,6 +34,8 @@ const Genre = () => {
       }
     } catch (error) {
       console.error("Failed to fetch genre:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -71,13 +76,10 @@ const Genre = () => {
         <button
           type="button"
           onClick={handleBack}
-          className="flex items-center gap-2 text-white/80 hover:text-primary transition-colors cursor-pointer group"
+          className="self-start flex items-center gap-2 text-white/80 hover:text-primary transition-colors cursor-pointer group"
           aria-label="Go back"
         >
-          <ArrowLeft size={22} className="group-hover:-translate-x-1 transition-transform" />
-          <span className="font-montserrat text-sm uppercase tracking-wider font-semibold">
-            Back
-          </span>
+          <ArrowLeft size={33} className="group-hover:-translate-x-1 transition-transform " />
         </button>
 
         <h1 className="font-montserrat text-white text-4xl md:text-6xl ">
@@ -110,19 +112,41 @@ const Genre = () => {
           ))}
         </ul>
       </header>
-
       <div className="bg-secondary min-h-screen p-14">
+        {preview && (
+          <div
+            className="fixed inset-0 bg-black/90 backdrop-blur-sm flex justify-center items-center p-4 z-50 cursor-pointer"
+            onClick={() => setPreview(false)}
+          >
+            <button
+              type="button"
+              className="absolute top-4 right-4 text-white/80 hover:text-white p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors z-10"
+              onClick={() => setPreview(false)}
+              aria-label="Close preview"
+            >
+              <X size={24} />
+            </button>
+            <img
+              src={previewRef.current?.querySelector("img")?.src}
+              alt="Preview"
+              className="w-auto h-auto max-w-full max-h-[85vh] sm:max-h-[90vh] object-contain rounded-md shadow-2xl select-none"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+        )}
         {isLoading ? (
           <div className="flex justify-center items-center py-20">
-            <p className="font-montserrat text-neutral text-lg">
-              Loading images...
-            </p>
+            <Loader size={30} />
           </div>
         ) : filteredImages.length > 0 ? (
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-5">
             {filteredImages.map((image) => (
               <ImageCard
                 key={image.id}
+                onClick={(e)=> {
+                  previewRef.current = e.currentTarget;
+                  setPreview(true);
+                }}
                 image={{
                   imageUrl: image.url,
                   imageFolderName:
@@ -134,6 +158,7 @@ const Genre = () => {
               />
             ))}
           </div>
+          
         ) : (
           <div className="flex justify-center items-center py-20">
             <p className="font-montserrat text-neutral text-lg">
