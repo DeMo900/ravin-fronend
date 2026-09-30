@@ -6,6 +6,7 @@ import { useRef} from 'react'
 import Genre from './pages/Genre'
 import { Route, Routes, BrowserRouter } from 'react-router-dom'
 import Collection from './components/Collection'
+import Contact from './components/Contact'
 
 function App() {
   const introRef = useRef<HTMLDivElement>(null);
@@ -21,6 +22,7 @@ function App() {
               <Hero />
               <Intro refs={{ introRef, workRef, contactRef }} />
               <Collection refs={{introRef, workRef, contactRef}}/>
+              <Contact refs={{introRef, workRef, contactRef}}/>
             </div>
           } />
           <Route path="/genre/:id" element={<Genre />} />
