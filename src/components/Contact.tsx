@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Copy } from "lucide-react";
 import type { SectionRefs } from "../types";
 
 interface ContactProps {
@@ -15,27 +15,21 @@ interface ContactLink {
 const contactLinks: ContactLink[] = [
   {
     title: "INSTAGRAM",
-    href: "https://instagram.com",
+    href: "https://www.instagram.com/7azem3mar74?stkn=aWh0Y3EyZnFlbHZv",
     bgImage:
       "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    title: "PHONE NUMBER",
+    href: "+201016716900",
+    bgImage:
+      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80",
   },
   {
     title: "BEHANCE",
     href: "https://behance.net",
     bgImage:
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    title: "LINKEDIN",
-    href: "https://linkedin.com",
-    bgImage:
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    title: "EMAIL",
-    href: "mailto:contact@hazemomar.com",
-    bgImage:
-      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80",
   },
 ];
 
@@ -68,7 +62,7 @@ const Contact = ({ refs }: ContactProps) => {
           {contactLinks.map((link, index) => (
             <motion.a
               key={link.title}
-              href={link.href}
+              href={link.href.startsWith("http") ? link.href : null}
               target={link.href.startsWith("http") ? "_blank" : undefined}
               rel={
                 link.href.startsWith("http") ? "noopener noreferrer" : undefined
@@ -99,11 +93,27 @@ const Contact = ({ refs }: ContactProps) => {
               <span className="relative z-10 font-montserrat font-light text-lg sm:text-xl md:text-2xl text-white tracking-widest uppercase">
                 {link.title}
               </span>
-
+          {/*coming soon if it's behnance*/}
+              {link.title === "BEHANCE" && (
+                <span className="relative z-10 text-white/80 group-hover:text-white group-hover:translate-x-1.5 transition-all duration-300">
+                  coming soon
+                </span>
+              )}
               {/* Arrow */}
-              <span className="relative z-10 text-white/80 group-hover:text-white group-hover:translate-x-1.5 transition-all duration-300">
-                <ArrowRight size={20} className="stroke-[1.5]" />
-              </span>
+              {link.title === "PHONE NUMBER" ? (
+                <span
+                  className="relative z-10 text-white/80 group-hover:text-white group-hover:translate-x-1.5 transition-all duration-300"
+                  onClick={() => {
+                   navigator.clipboard.writeText(link.href);
+                  }}
+                >
+                  <Copy size={20} className="stroke-[1.5]" />
+                </span>
+              ) : (
+                <span className="relative z-10 text-white/80 group-hover:text-white group-hover:translate-x-1.5 transition-all duration-300">
+                  <ArrowRight size={20} className="stroke-[1.5]" />
+                </span>
+              )}
             </motion.a>
           ))}
         </div>
